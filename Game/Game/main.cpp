@@ -28,7 +28,7 @@ int main()
         window.clear();
         player.update(window);
         //std::cout << "x: " << player.object().getPosition().x << ", y: " << player.object().getPosition().x;
-        //std::cout << "x: " << player.getVelocity().x << ", y: " << player.getVelocity().y;
+        std::cout << "x: " << player.getVelocity().x << ", y: " << player.getVelocity().y;
         window.draw(player.object());
         window.display();
     }

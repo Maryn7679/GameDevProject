@@ -1,10 +1,11 @@
 #include <SFML/Graphics.hpp>
+#include <glm/vec2.hpp>
 
 class Player {
 public:
     Player(float x, float y) {
         _playerObject.setSize(sf::Vector2(20.f, 20.f));
-        _velocity = sf::Vector2(0.f, 0.f);
+        _velocity = glm::vec2(0.f, 0.f);
         _playerObject.setFillColor(sf::Color::Green);
         _playerObject.setPosition({ x, y });
         _x = x;
@@ -15,12 +16,12 @@ public:
         return _playerObject;
     }
 
-    sf::Vector2<float> getVelocity() {
+    glm::vec2 getVelocity() {
         return _velocity;
     }
 
     void update(sf::RenderWindow& window) {
-        sf::Vector2f acceleration;
+        glm::vec2 acceleration = glm::vec2(0.f, 0.f);
 
         const float dAcc = 0.3f;
 
@@ -37,9 +38,14 @@ public:
 
         _x += _velocity.x;
         _y += _velocity.y;
+        //_x += acceleration.x;
+        //_y += acceleration.y;
 
-        _velocity = 0.1f * _velocity;
-        //_velocity = sf::Vector2(0.f, 0.f);
+        _velocity = 0.5f * _velocity;
+        if (_velocity.length() < 0.01f)
+        {
+            _velocity = glm::vec2(0.f, 0.f);
+        }
 
         _playerObject.setPosition(_x, _y);
 
@@ -47,7 +53,7 @@ public:
     };
 private:
     sf::RectangleShape _playerObject;
-    sf::Vector2<float> _velocity;
+    glm::vec2 _velocity;
     float _x;
     float _y;
 
