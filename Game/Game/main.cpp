@@ -2,16 +2,19 @@
 #include <glm/vec3.hpp>
 #include <glm/geometric.hpp>
 #include <iostream>
+#include "player.cpp"
 
 int main()
 {
-    glm::vec3 v(2.f, 2.f, 2.f);
-    float l = glm::length(v);
-    std::cout << l;
+    //glm::vec3 v(2.f, 2.f, 2.f);
+    //float l = glm::length(v);
+    //std::cout << l;
 
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    sf::RenderWindow window(sf::VideoMode(500, 500), "Game!");
+    //sf::RectangleShape shape(sf::Vector2(20.f, 20.f));
+    //shape.setFillColor(sf::Color::Green);
+
+    Player player(250.f, 250.f);
 
     while (window.isOpen())
     {
@@ -23,7 +26,10 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+        player.update(window);
+        //std::cout << "x: " << player.object().getPosition().x << ", y: " << player.object().getPosition().x;
+        //std::cout << "x: " << player.getVelocity().x << ", y: " << player.getVelocity().y;
+        window.draw(player.object());
         window.display();
     }
 
