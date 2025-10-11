@@ -6,31 +6,36 @@
 
 int main()
 {
-    //glm::vec3 v(2.f, 2.f, 2.f);
-    //float l = glm::length(v);
-    //std::cout << l;
-
-    sf::RenderWindow window(sf::VideoMode(500, 500), "Game!");
-    //sf::RectangleShape shape(sf::Vector2(20.f, 20.f));
-    //shape.setFillColor(sf::Color::Green);
-
+    sf::RenderWindow window(sf::VideoMode(500, 500), "Game!", sf::Style::Close);
     Player player(250.f, 250.f);
+
+    sf::Event event;
+    bool isActive = true;
 
     while (window.isOpen())
     {
-        sf::Event event;
+        // read
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            if (event.type == sf::Event::LostFocus)
+                isActive = false;
+            if (event.type == sf::Event::GainedFocus)
+                isActive = true;
         }
 
-        window.clear();
-        player.update(window);
-        //std::cout << "x: " << player.object().getPosition().x << ", y: " << player.object().getPosition().x;
-        std::cout << "x: " << player.getVelocity().x << ", y: " << player.getVelocity().y;
-        window.draw(player.object());
-        window.display();
+        // update
+        if (isActive) {
+            player.getAcceleration();
+
+            player.updatePosition(window);
+
+            // render
+            window.clear();
+            window.draw(player.object());
+            window.display();
+        }
     }
 
     return 0;
