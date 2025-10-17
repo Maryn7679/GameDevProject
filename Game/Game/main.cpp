@@ -12,29 +12,37 @@ int main()
     sf::Event event;
     bool isActive = true;
 
+    sf::Clock clock;
+    float fps = 60.f;
+
     while (window.isOpen())
     {
-        while (window.pollEvent(event))
+        if (clock.getElapsedTime().asSeconds() > 1 / fps)
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
-            if (event.type == sf::Event::LostFocus)
-                isActive = false;
-            if (event.type == sf::Event::GainedFocus)
-                isActive = true;
-        }
+            clock.restart();
 
-        if (isActive) {
-            // read
-            glm::vec2 direction = functions.getInputDirection();
+            while (window.pollEvent(event))
+            {
+                if (event.type == sf::Event::Closed)
+                    window.close();
+                if (event.type == sf::Event::LostFocus)
+                    isActive = false;
+                if (event.type == sf::Event::GainedFocus)
+                    isActive = true;
+            }
 
-            //update
-            player.updatePosition(window, direction);
+            if (isActive) {
+                // read
+                glm::vec2 direction = functions.getInputDirection();
 
-            // render
-            window.clear();
-            window.draw(player.object());
-            window.display();
+                //update
+                player.updatePosition(window, direction);
+
+                // render
+                window.clear();
+                window.draw(player.object());
+                window.display();
+            }
         }
     }
 

@@ -6,7 +6,8 @@ private:
     sf::RectangleShape _playerObject;
     glm::vec2 _velocity;
     glm::vec2 _acceleration;
-    const float _dAcc = 0.3f;
+    const float _accCoef = 0.5f;
+    const float _velCoef = 0.99f;
     float _x;
     float _y;
 
@@ -29,27 +30,14 @@ public:
         return _velocity;
     }
 
-    //void getAcceleration() {
-    //    _acceleration = glm::vec2(0.f, 0.f);
-
-    //    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-    //        _acceleration.y -= _dAcc;
-    //    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-    //        _acceleration.x -= _dAcc;
-    //    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-    //        _acceleration.y += _dAcc;
-    //    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-    //        _acceleration.x += _dAcc;
-    //}
-
     void updatePosition(sf::RenderWindow& window, glm::vec2 direction) {
-        _acceleration = direction * _dAcc;
+        _acceleration = direction * _accCoef;
         _velocity += _acceleration;
 
         _x += _velocity.x;
         _y += _velocity.y;
 
-        _velocity = 0.5f * _velocity;
+        _velocity = _velCoef * _velocity;
         if (_velocity.length() < 0.01f)
         {
             _velocity = glm::vec2(0.f, 0.f);
