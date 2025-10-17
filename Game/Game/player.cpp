@@ -29,20 +29,21 @@ public:
         return _velocity;
     }
 
-    void getAcceleration() {
-        _acceleration = glm::vec2(0.f, 0.f);
+    //void getAcceleration() {
+    //    _acceleration = glm::vec2(0.f, 0.f);
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-            _acceleration.y -= _dAcc;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-            _acceleration.x -= _dAcc;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-            _acceleration.y += _dAcc;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-            _acceleration.x += _dAcc;
-    }
+    //    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    //        _acceleration.y -= _dAcc;
+    //    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    //        _acceleration.x -= _dAcc;
+    //    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    //        _acceleration.y += _dAcc;
+    //    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    //        _acceleration.x += _dAcc;
+    //}
 
-    void updatePosition(sf::RenderWindow& window) {
+    void updatePosition(sf::RenderWindow& window, glm::vec2 direction) {
+        _acceleration = direction * _dAcc;
         _velocity += _acceleration;
 
         _x += _velocity.x;
@@ -59,10 +60,10 @@ public:
         }
         if (_y < 0) {
             _y = window.getSize().y;
-        }        
+        }
         if (_x > window.getSize().x) {
             _x = 0;
-        }        
+        }
         if (_y > window.getSize().y) {
             _y = 0;
         }

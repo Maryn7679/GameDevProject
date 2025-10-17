@@ -1,11 +1,11 @@
 #include <SFML/Graphics.hpp>
-#include <glm/vec3.hpp>
-#include <glm/geometric.hpp>
 #include <iostream>
 #include "player.cpp"
+#include "functions.cpp"
 
 int main()
 {
+    Functions functions;
     sf::RenderWindow window(sf::VideoMode(500, 500), "Game!", sf::Style::Close);
     Player player(250.f, 250.f);
 
@@ -14,7 +14,6 @@ int main()
 
     while (window.isOpen())
     {
-        // read
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
@@ -25,11 +24,12 @@ int main()
                 isActive = true;
         }
 
-        // update
         if (isActive) {
-            player.getAcceleration();
+            // read
+            glm::vec2 direction = functions.getInputDirection();
 
-            player.updatePosition(window);
+            //update
+            player.updatePosition(window, direction);
 
             // render
             window.clear();
