@@ -1,11 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "player.cpp"
-#include "functions.cpp"
+#include "player.hpp"
+#include "functions.hpp"
 
 int main()
 {
     Functions functions;
+    //MyTextureManager textureManager;
+    //textureManager.addTexture("player", "textures/player.png");
     sf::RenderWindow window(sf::VideoMode(500, 500), "Game!", sf::Style::Close);
     Player player(250.f, 250.f);
 
@@ -37,10 +39,13 @@ int main()
 
                 //update
                 player.updatePosition(window, direction);
+                //std::cout << "x:" << direction.x << " y:" << direction.y;
+                std::cout << "x:" << player.getVelocity().x << " y:" << player.getVelocity().y;
+                //std::cout << "x:" << player.getAcceleration().x << " y:" << player.getAcceleration().y;
 
                 // render
                 window.clear();
-                window.draw(player.object());
+                window.draw(player.getSprite());
                 window.display();
             }
         }
