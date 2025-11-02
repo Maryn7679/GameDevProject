@@ -1,15 +1,16 @@
-#include <SFML/Graphics.hpp>
 #include <iostream>
 #include "player.hpp"
-#include "functions.hpp"
 
 int main()
 {
-    Functions functions;
-    //MyTextureManager textureManager;
-    //textureManager.addTexture("player", "textures/player.png");
     sf::RenderWindow window(sf::VideoMode(500, 500), "Game!", sf::Style::Close);
-    Player player(250.f, 250.f);
+    Player player;
+    player.setSize(20.f, 20.f);
+    player.setPosition(250.f, 250.f);
+    player.setAcceleration(0.5f);
+    player.setResistance(0.95f);
+    player.setTextureFilepath("textures/player.png");
+    player.loadTexture();
 
     sf::Event event;
     bool isActive = true;
@@ -35,12 +36,12 @@ int main()
 
             if (isActive) {
                 // read
-                glm::vec2 direction = functions.getInputDirection();
+                glm::vec2 direction = player.getInputDirection();
 
                 //update
                 player.updatePosition(window, direction);
-                //std::cout << "x:" << direction.x << " y:" << direction.y;
-                std::cout << "x:" << player.getVelocity().x << " y:" << player.getVelocity().y;
+                //std::cout << " x:" << player.x() << " y:" << player.y();
+                //std::cout << "x:" << player.getVelocity().x << " y:" << player.getVelocity().y;
                 //std::cout << "x:" << player.getAcceleration().x << " y:" << player.getAcceleration().y;
 
                 // render

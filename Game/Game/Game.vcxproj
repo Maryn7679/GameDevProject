@@ -157,10 +157,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="functions.hpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="movable.hpp" />
+    <ClCompile Include="object.hpp" />
     <ClCompile Include="player.hpp" />
-    <ClCompile Include="TextureManager.hpp" />
+    <ClCompile Include="textured.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\player.png" />

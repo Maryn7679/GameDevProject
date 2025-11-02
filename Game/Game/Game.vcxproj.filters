@@ -21,10 +21,13 @@
     <ClCompile Include="player.hpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="functions.hpp">
+    <ClCompile Include="object.hpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TextureManager.hpp">
+    <ClCompile Include="textured.hpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="movable.hpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
