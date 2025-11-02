@@ -14,7 +14,12 @@ private:
 	float _y;
 
 public:
-	GameObject() {}
+	GameObject() 
+	{
+		_hitbox.setFillColor(sf::Color(0, 0, 0, 0));
+		_hitbox.setOutlineThickness(1.f);
+		_hitbox.setOutlineColor(sf::Color(250, 0, 250));
+	}
 
 	float x() { return _x; }
 	float y() { return _y; }

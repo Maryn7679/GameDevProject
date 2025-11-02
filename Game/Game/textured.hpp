@@ -3,13 +3,18 @@
 class Textured : public virtual GameObject {
 private:
 	std::string _textureFile;
-	sf::Sprite _sprite;
 	sf::Texture _texture;
+	sf::Sprite _sprite;
 
 public:
 	Textured() {}
 
-	void loadTexture()
+	sf::Sprite getSprite()
+	{
+		return _sprite;
+	}
+
+	void loadSprite()
 	{
 		if (_texture.loadFromFile(_textureFile))
 		{
@@ -19,11 +24,7 @@ public:
 			_texture.create(GameObject::width(), GameObject::height());
 			_sprite.setTexture(_texture);
 		}
-	}
-
-	sf::Sprite getSprite()
-	{
-		return _sprite;
+		_sprite.setPosition(GameObject::x(), GameObject::y());
 	}
 
 	void setTextureFilepath(std::string filepath)
@@ -31,6 +32,7 @@ public:
 		_textureFile = filepath;
 	}
 
+protected:
 	void setSpritePosition(float x, float y)
 	{
 		_sprite.setPosition(x, y);

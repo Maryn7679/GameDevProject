@@ -4,16 +4,30 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(500, 500), "Game!", sf::Style::Close);
+
     Player player;
     player.setSize(20.f, 20.f);
     player.setPosition(250.f, 250.f);
     player.setAcceleration(0.5f);
     player.setResistance(0.95f);
     player.setTextureFilepath("textures/player.png");
-    player.loadTexture();
+    player.loadSprite();
+
+    Textured wall;
+    wall.setSize(20.f, 116.f);
+    wall.setPosition(400.f, 250.f);
+    wall.setTextureFilepath("textures/wall.png");
+    wall.loadSprite();
+
+    Textured enemy;
+    enemy.setSize(123.f, 116.f);
+    enemy.setPosition(50.f, 250.f);
+    enemy.setTextureFilepath("textures/enemy.png");
+    enemy.loadSprite();
 
     sf::Event event;
     bool isActive = true;
+    bool renderHitbox = true;
 
     sf::Clock clock;
     float fps = 60.f;
@@ -47,6 +61,14 @@ int main()
                 // render
                 window.clear();
                 window.draw(player.getSprite());
+                window.draw(wall.getSprite());
+                window.draw(enemy.getSprite());
+                if (renderHitbox) 
+                {
+                    window.draw(player.getHitbox());
+                    window.draw(wall.getHitbox());
+                    window.draw(enemy.getHitbox());
+                }
                 window.display();
             }
         }
